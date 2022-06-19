@@ -10,5 +10,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 558547b53ac125b49874488fa76cf0a2, type: 3}
-  m_Name: Gameplay_Platform Speed Channel
+  m_Name: Gameplay_Platform Speed Event
   m_EditorClassIdentifier: 

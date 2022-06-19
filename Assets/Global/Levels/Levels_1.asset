@@ -14,10 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levelSpeed: 5
   startingPlayerUnits: 1
-  levelSections:
-  - _multipliers: 0300000006000000
+  _levelSections:
+  - _multiplierA: 3
+    _multiplierB: 5
     _enemies: 3
-  - _multipliers: 0200000001000000
-    _enemies: 4
-  - _multipliers: 0300000004000000
+  - _multiplierA: 4
+    _multiplierB: 2
     _enemies: 6
+  - _multiplierA: 2
+    _multiplierB: 3
+    _enemies: 5

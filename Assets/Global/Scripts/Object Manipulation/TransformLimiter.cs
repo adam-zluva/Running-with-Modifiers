@@ -18,11 +18,7 @@ public class TransformLimiter : MonoBehaviour
         position.y = RestrictPosition(ref position.y, yRange);
         position.z = RestrictPosition(ref position.z, zRange);
 
-        if (position != transform.localPosition)
-        {
-            onPositionReset.Invoke();
-            Debug.Log($"Reset to {position}");
-        }
+        if (position != transform.localPosition) onPositionReset.Invoke();
 
         transform.localPosition = position;
     }

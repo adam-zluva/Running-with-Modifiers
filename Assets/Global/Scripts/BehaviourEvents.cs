@@ -6,6 +6,7 @@ public class BehaviourEvents : MonoBehaviour
     [SerializeField] private UnityEvent onAwake;
     [SerializeField] private UnityEvent onStart;
     [SerializeField] private UnityEvent onUpdate;
+    [SerializeField] private UnityEvent onDisable;
 
     private void Awake()
     {
@@ -20,5 +21,10 @@ public class BehaviourEvents : MonoBehaviour
     private void Update()
     {
         onUpdate.Invoke();
+    }
+
+    private void OnDisable()
+    {
+        
     }
 }
