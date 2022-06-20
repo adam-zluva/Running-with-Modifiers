@@ -11,4 +11,9 @@ public static class ExtensionMethods
     {
         return (x % m + m) % m;
     }
+
+    public static Vector3 Clamp(this Vector3 vector, float magnitude)
+    {
+        return Vector3.ClampMagnitude(vector, magnitude);
+    }
 }

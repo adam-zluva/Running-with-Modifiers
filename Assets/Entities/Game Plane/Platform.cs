@@ -10,10 +10,28 @@ public class Platform : MonoBehaviour
     [Space]
     [SerializeField] private FloatEventChannel multiplyPlayerChannel;
     [SerializeField] private ServiceProvider serviceProvider;
+    [Space]
+    [SerializeField] private UnityEvent onLevelFinished;
+
+    private LevelManager levelManager;
+
+    private Vector3 startPosition;
+
+    private void Start()
+    {
+        startPosition = transform.localPosition;
+
+        levelManager = serviceProvider.GetService<LevelManager>(typeof(LevelManager));
+        levelManager.onLevelFinished.AddListener(() => onLevelFinished.Invoke());
+    }
+
+    public void ResetToStart()
+    {
+        transform.localPosition = startPosition;
+    }
 
     public void UpdatePlatform()
     {
-        var levelManager = serviceProvider.GetService<LevelManager>(typeof(LevelManager));
         var section = levelManager.GetLevelSection();
         if (section != null) SetSection(section);
     }
@@ -37,8 +55,11 @@ public class Platform : MonoBehaviour
 
         public void SetMultiplier(int multiplier, UnityAction multAction)
         {
-            trigger.onTriggerEnter.RemoveAllListeners();
             trigger.onTriggerEnter.AddListener(multAction);
+            trigger.onTriggerEnter.AddListener(() =>
+            {
+                trigger.onTriggerEnter.RemoveAllListeners();
+            });
 
             multiplierText.text = $"x{multiplier}";
         }

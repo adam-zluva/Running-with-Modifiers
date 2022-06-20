@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using EventChannels;
 
 public class LevelManager : MonoBehaviour
@@ -8,10 +9,24 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private VoidEventChannel gameStartChannel;
     [SerializeField] private FloatEventChannel platformsSpeedChannel;
 
-    private LevelSet currentLevel;
-    private int section;
+    public UnityEvent onLevelFinished;
 
-    private void Start()
+    private LevelSet currentLevel;
+    private int _section;
+    private int section
+    {
+        get => _section;
+        set
+        {
+            _section = value;
+            if (_section >= currentLevel.levelSections.Length)
+            {
+                onLevelFinished.Invoke();
+            }
+        }
+    }
+
+    private void OnEnable()
     {
         serviceProvider.AddService(this);
     }
