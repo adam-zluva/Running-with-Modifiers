@@ -9,6 +9,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private VoidEventChannel gameStartChannel;
     [SerializeField] private FloatEventChannel platformsSpeedChannel;
 
+    public UnityEvent<LevelSet> onLevelStart;
     public UnityEvent onLevelFinished;
 
     private LevelSet currentLevel;
@@ -37,6 +38,7 @@ public class LevelManager : MonoBehaviour
 
         section = 0;
 
+        onLevelStart.Invoke(level);
         gameStartChannel.RaiseEvent();
         platformsSpeedChannel.RaiseEvent(currentLevel.levelSpeed);
     }

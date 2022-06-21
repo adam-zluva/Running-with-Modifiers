@@ -6,7 +6,8 @@ public class LevelSet : ScriptableObject, ISerializationCallbackReceiver
     [SerializeField] private float _levelSpeed;
     public float levelSpeed => _levelSpeed;
 
-    [SerializeField] private int startingPlayerUnits = 1;
+    [SerializeField] private int _startingPlayerUnits = 1;
+    public int startingPlayerUnits { get => _startingPlayerUnits; private set => _startingPlayerUnits = value; }
 
     [SerializeField] private LevelSection[] _levelSections;
     public LevelSection[] levelSections => _levelSections;

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d34e1828f18409847a1cc3034bd8408c, type: 3}
   m_Name: Levels_1
   m_EditorClassIdentifier: 
-  _levelSpeed: 10
+  _levelSpeed: 5
   startingPlayerUnits: 1
   _levelSections:
   - _multiplierA: 3

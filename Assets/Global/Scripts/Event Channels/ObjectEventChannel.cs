@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace EventChannels
 {
-    [CreateAssetMenu(menuName = "Event Channels/ Object")]
+    [CreateAssetMenu(menuName = "Event Channels/Object")]
     ///<summary>
     /// Avoid using if possible
     ///</summary>

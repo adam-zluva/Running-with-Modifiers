@@ -22,7 +22,7 @@ public class ServiceProvider : ScriptableObject
         var type = service.GetType();
         if (!services.ContainsKey(type))
             services.Add(type, service);
-        else Debug.LogWarning($"Service Provider {this} already contains the type {type}!");
+        else UnityEngine.Debug.LogWarning($"Service Provider {this} already contains the type {type}!");
     }
 
     public T GetService<T>(Type type)
@@ -31,7 +31,7 @@ public class ServiceProvider : ScriptableObject
         {
             return (T)services[type];
         }
-        else Debug.LogWarning($"Service Provider {this} does not contain a service of the type {type}!");
+        else UnityEngine.Debug.LogWarning($"Service Provider {this} does not contain a service of the type {type}!");
 
         return default;
     }
