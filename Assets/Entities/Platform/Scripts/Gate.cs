@@ -8,19 +8,19 @@ public class Gate : MonoBehaviour
     [SerializeField] private GameObject gfx;
     private Collider triggerCollider;
 
-    [SerializeField] private UnityEvent<Vector3, int> onGatePassed;
+    [SerializeField] private UnityEvent<Vector3, MathExpression> onGatePassed;
 
-    private int multiplier;
+    private MathExpression mathExpression;
 
     private void Awake()
     {
         triggerCollider = GetComponent<Collider>();
     }
 
-    public void SetGate(int multiplier)
+    public void SetGate(MathExpression expression)
     {
-        this.multiplier = multiplier;
-        multiplierText.text = $"x{multiplier}";
+        this.mathExpression = expression;
+        multiplierText.text = $"{expression.operation.OperatorSymbol()}{expression.value}";
 
         Show();
     }
@@ -39,6 +39,6 @@ public class Gate : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        onGatePassed.Invoke(other.transform.position, multiplier);
+        onGatePassed.Invoke(other.transform.position, mathExpression);
     }
 }

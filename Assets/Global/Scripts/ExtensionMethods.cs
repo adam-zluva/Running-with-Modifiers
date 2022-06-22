@@ -52,4 +52,38 @@ public static class ExtensionMethods
     {
         return Mathf.Lerp(newFrom, newTo, Mathf.InverseLerp(from, to, v));
     }
+
+    public static string OperatorSymbol(this MathExpression.Operation operation)
+    {
+        switch (operation)
+        {
+            case MathExpression.Operation.Addition:
+                return "+";
+            case MathExpression.Operation.Subtraction:
+                return "-";
+            case MathExpression.Operation.Multiplication:
+                return "x";
+            case MathExpression.Operation.Division:
+                return ":";
+            default:
+                return "?";
+        }
+    }
+
+    public static float Calculate(this MathExpression.Operation operation, float leftSide, float rightSide)
+    {
+        switch (operation)
+        {
+            case MathExpression.Operation.Addition:
+                return leftSide + rightSide;
+            case MathExpression.Operation.Subtraction:
+                return leftSide - rightSide;
+            case MathExpression.Operation.Multiplication:
+                return leftSide * rightSide;
+            case MathExpression.Operation.Division:
+                return leftSide / rightSide;
+            default:
+                return leftSide;
+        }
+    }
 }

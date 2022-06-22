@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class Controller : MonoBehaviour
 {
-    [SerializeField] private Transform target;
-    [SerializeField] private Vector2 bounds;
+    [SerializeField] private Transform movementTarget;
+    [SerializeField] private Vector2 moveTargetBounds;
+
+    [SerializeField] private Transform cameraTarget;
+    [SerializeField] private Vector2 camTargetBounds;
+
     [SerializeField] private LayerMask groundLayer;
 
     private Vector2 _position;
@@ -28,20 +32,26 @@ public class Controller : MonoBehaviour
 
     public void RecalculatePosition()
     {
-        float point = target.localPosition.x;
+        // Movement Target
+        float point = movementTarget.localPosition.x;
 
         Ray ray = cam.ScreenPointToRay(position);
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, groundLayer.value))
         {
-            var localHit = (target.worldToLocalMatrix * hit.point);
-            point = localHit.x;
+            var localHit = (movementTarget.worldToLocalMatrix * hit.point);
+            point = Mathf.Clamp(localHit.x, moveTargetBounds.x, moveTargetBounds.y);
         }
 
-        target.localPosition = new Vector3(Mathf.Clamp(point, bounds.x, bounds.y), 0f, 0f);
+        movementTarget.localPosition = new Vector3(point, 0f, 0f);
+
+        // Camera Target
+        float cameraTargetX = Mathf.Lerp(0f, point, 0.5f);
+        cameraTarget.localPosition = new Vector3(cameraTargetX, 0f, 0f);
     }
 
     public void ResetPosition()
     {
-        target.localPosition = Vector3.zero;
+        movementTarget.localPosition = Vector3.zero;
+        cameraTarget.localPosition = Vector3.zero;
     }
 }

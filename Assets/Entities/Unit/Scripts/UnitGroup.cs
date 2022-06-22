@@ -22,7 +22,7 @@ public class UnitGroup : MonoBehaviour
 
     public void AddUnit(Unit unit)
     {
-        _units.Add(unit);
+        units.Add(unit);
         unit.onUnitDeath.AddListener(() =>
         {
             RemoveUnit(unit);
@@ -31,7 +31,7 @@ public class UnitGroup : MonoBehaviour
 
     public void RemoveUnit(Unit unit)
     {
-        _units.Remove(unit);
+        units.Remove(unit);
 
         if (_units.Count == 0)
         {
@@ -51,15 +51,26 @@ public class UnitGroup : MonoBehaviour
         return unitObj;
     }
 
-    public void Multiply(Vector3 worldPosition, int multiplier)
+    public void HandleExpression(Vector3 worldPosition, MathExpression expression)
     {
-        int newUnitCount = numberOfUnits * multiplier;
-        int unitsNeeded = newUnitCount - numberOfUnits;
+        int newUnitCount = (int)expression.operation.Calculate(numberOfUnits, expression.value);
+        int unitsNeeded = Mathf.Abs(newUnitCount - numberOfUnits);
 
-        for (int i = 0; i < unitsNeeded; i++)
+        if (newUnitCount > numberOfUnits)
         {
-            Vector3 offset = new Vector3(Random.value, 0f, Random.value).Clamp(0.25f);
-            var unit = SpawnUnit(worldPosition + offset, true);
+            for (int i = 0; i < unitsNeeded; i++)
+            {
+                Vector3 offset = new Vector3(Random.value, 0f, Random.value).Clamp(0.25f);
+                var unit = SpawnUnit(worldPosition + offset, true);
+            }
+        } else if (newUnitCount < numberOfUnits)
+        {
+            for (int i = 0; i < unitsNeeded; i++)
+            {
+                var unit = units[units.Count - 1];
+                RemoveUnit(unit);
+                unit.Dispose();
+            }
         }
     }
 }

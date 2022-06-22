@@ -12,18 +12,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d34e1828f18409847a1cc3034bd8408c, type: 3}
   m_Name: Levels_1
   m_EditorClassIdentifier: 
-  _platformSpacing: 25
-  _startingPlayerUnits: 1
+  _startingPlayerUnits: 3
   _levelSections:
-  - _multiplierA: 3
-    _multiplierB: 5
-    _enemies: 3
+  - _expressionA:
+      _operation: 2
+      _value: 3
+    _expressionB:
+      _operation: 0
+      _value: 4
+    _enemies: 7
     lastSection: 0
-  - _multiplierA: 4
-    _multiplierB: 2
+  - _expressionA:
+      _operation: 0
+      _value: 7
+    _expressionB:
+      _operation: 2
+      _value: 3
     _enemies: 6
     lastSection: 0
-  - _multiplierA: 2
-    _multiplierB: 3
+  - _expressionA:
+      _operation: 2
+      _value: 1
+    _expressionB:
+      _operation: 3
+      _value: 0.5
     _enemies: 5
     lastSection: 1

@@ -25,17 +25,17 @@ public class Platform : MonoBehaviour
         onEnconterEnded.Invoke();
     }
 
-    public void GatePassed(Vector3 position, int multiplier)
+    public void GatePassed(Vector3 position, MathExpression expression)
     {
-        playerUnitGroup.value.Multiply(position, multiplier);
+        playerUnitGroup.value.HandleExpression(position, expression);
         onGatePassed.Invoke();
     }
 
     public void SetSection(LevelSection section)
     {
         SetUnits(section.enemies);
-        gateA.SetGate(section.multiplierA);
-        gateB.SetGate(section.multiplierB);
+        gateA.SetGate(section.expressionA);
+        gateB.SetGate(section.expressionB);
     }
 
     void SetUnits(int count)

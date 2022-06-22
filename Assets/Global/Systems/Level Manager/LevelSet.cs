@@ -1,4 +1,5 @@
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 [CreateAssetMenu(menuName = "Level Set")]
 public class LevelSet : ScriptableObject, ISerializationCallbackReceiver
@@ -20,14 +21,31 @@ public class LevelSet : ScriptableObject, ISerializationCallbackReceiver
 [System.Serializable]
 public class LevelSection
 {
-    [SerializeField] private int _multiplierA;
-    public int multiplierA => _multiplierA;
+    [SerializeField] private MathExpression _expressionA;
+    public MathExpression expressionA => _expressionA;
 
-    [SerializeField] private int _multiplierB;
-    public int multiplierB => _multiplierB;
+    [SerializeField] private MathExpression _expressionB;
+    public MathExpression expressionB => _expressionB;
 
     [SerializeField] private int _enemies;
     public int enemies => _enemies;
 
     [HideInInspector] public bool lastSection;
+}
+
+[System.Serializable, InlineProperty]
+public class MathExpression
+{
+    [HorizontalGroup, SerializeField, HideLabel]
+    private Operation _operation;
+    public Operation operation => _operation;
+
+    [HorizontalGroup, SerializeField, HideLabel]
+    private float _value;
+    public float value => _value;
+
+    public enum Operation
+    {
+        Addition, Subtraction, Multiplication, Division
+    }
 }
