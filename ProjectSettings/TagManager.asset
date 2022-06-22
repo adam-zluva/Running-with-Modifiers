@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - PlayerFollowPoint
+  - PlatformEnd
+  - PlayerUnitGroup
+  - PlayerUnit
+  - EnemyUnit
   layers:
   - Default
   - TransparentFX
@@ -13,8 +17,8 @@ TagManager:
   - Water
   - UI
   - PlayerUnit
-  - Gate
   - EnemyUnit
+  - Gate
   - 
   - 
   - 

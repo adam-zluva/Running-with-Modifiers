@@ -1,68 +1,98 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(ObjectMover))]
 public class Unit : MonoBehaviour
 {
-    [SerializeField] private float detectionRadius;
-    [SerializeField] private LayerMask enemyMask;
-
+    [SerializeField] private GameObjectPool pool;
     public UnityEvent onUnitDeath;
-    public UnityEvent<Transform> onEnemyFound;
+    [SerializeField] private ObjectMover mover;
+    [SerializeField] private string enemyTag;
 
-    private void OnTriggerEnter(Collider other)
+    private GameObject currentTarget;
+    private List<Unit> targets;
+
+    private bool dead;
+
+    public void Init()
     {
-        int layer = other.gameObject.layer;
-        // if layer is in enemyMask
-        if ((enemyMask.value & (1 << layer)) != 0)
+        dead = false;
+    }
+
+    public void StartEncounter(UnitGroup enemyGroup)
+    {
+        targets = new List<Unit>(enemyGroup.units);
+
+        foreach (var target in targets)
         {
-            Death();
-        }
-    }
-
-    void Death()
-    {
-        onUnitDeath.Invoke();
-        onUnitDeath.RemoveAllListeners();
-    }
-
-    public void SearchForEnemy()
-    {
-        Transform target = GetNearestEnemy();
-        if (target && target.TryGetComponent(out Unit unit))
-        {
-            SetTarget(unit);
-        }
-        else UnityEngine.Debug.LogWarning("No enemy found");
-    }
-
-    void SetTarget(Unit otherUnit)
-    {
-        onEnemyFound.Invoke(otherUnit.transform);
-        otherUnit.onUnitDeath.AddListener(SearchForEnemy);
-    }
-
-    Transform GetNearestEnemy()
-    {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRadius, enemyMask.value);
-        Transform nearestTransform = null;
-        float nearestDistance = Mathf.Infinity;
-        foreach (var collider in colliders)
-        {
-            Vector3 position = collider.transform.position;
-            float distance = Vector3.Distance(transform.position, position);
-            if (distance < nearestDistance)
+            target.onUnitDeath.AddListener(() =>
             {
-                nearestDistance = distance;
-                nearestTransform = collider.transform;
+                targets.Remove(target);
+            });
+        }
+
+        SetTarget(GetNearestUnit());
+    }
+
+    public void EndEncounter()
+    {
+        mover.SetTarget(null);
+    }
+
+    public void SetTarget(Unit target)
+    {
+        if (target == null)
+        {
+            EndEncounter();
+            return;
+        }
+
+        currentTarget = target.gameObject;
+        target.onUnitDeath.AddListener(() =>
+        {
+            SetTarget(GetNearestUnit());
+        });
+        mover.SetTarget(currentTarget.transform);
+        mover.enabled = true;
+    }
+
+    private Unit GetNearestUnit()
+    {
+        float nearestDist = Mathf.Infinity;
+        Unit unit = null;
+        foreach (var target in targets)
+        {
+            float dist = Vector3.Distance(transform.position, target.transform.position);
+            if (dist < nearestDist)
+            {
+                nearestDist = dist;
+                unit = target;
             }
         }
 
-        return nearestTransform;
+        return unit;
     }
 
-    private void OnDrawGizmosSelected()
+    public void Death()
     {
-        Gizmos.DrawWireSphere(transform.position, detectionRadius);
+        if (dead) return;
+
+        dead = true;
+        onUnitDeath.Invoke();
+        onUnitDeath.RemoveAllListeners();
+        pool.ReturnObject(gameObject);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag(enemyTag))
+        {
+            if (other.TryGetComponent(out Unit otherUnit))
+            {
+                otherUnit.Death();
+            }
+
+            Death();
+        }
     }
 }

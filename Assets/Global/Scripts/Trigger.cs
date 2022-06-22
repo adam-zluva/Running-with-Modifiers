@@ -13,11 +13,24 @@ public class Trigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        onTriggerEnter.Invoke();
+        if (compareTag)
+        {
+            if (other.CompareTag(targetTag)) onTriggerEnter.Invoke();
+        } else
+        {
+            onTriggerEnter.Invoke();
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        onTriggerExit.Invoke();
+        if (compareTag)
+        {
+            if (other.CompareTag(targetTag)) onTriggerExit.Invoke();
+        }
+        else
+        {
+            onTriggerExit.Invoke();
+        }
     }
 }

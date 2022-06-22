@@ -9,7 +9,7 @@ public class ObjectMover : MonoBehaviour
     [Space]
     [SerializeField] private MovementType movementType;
     [SerializeField, ShowIf("movementType", MovementType.Translation)] private Vector3 moveDirection;
-    [SerializeField, ShowIf("movementType", MovementType.Target)] private TransformReference followTarget;
+    [SerializeField, ShowIf("movementType", MovementType.Target)] private Reference<Transform> followTarget;
     [Space]
     [SerializeField] private float _speedMultiplier = 1f;
     public float speedMultiplier { get => _speedMultiplier; set => _speedMultiplier = value; }
@@ -30,7 +30,8 @@ public class ObjectMover : MonoBehaviour
 
     public void SetTarget(Transform target)
     {
-        followTarget.value = target;
+        if (target != null) followTarget.value = target;
+        else followTarget.BuildReferenceValue();
     }
 
     public void TeleportTo(Vector3 worldPosition)

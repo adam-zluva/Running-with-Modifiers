@@ -2,14 +2,17 @@ using System;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-[CreateAssetMenu(menuName = "Event Channels/Void")]
-public class VoidEventChannel : ScriptableObject
+namespace EventChannels
 {
-    public Action onEventRaised;
-
-    [Button("Raise Event", ButtonSizes.Medium)]
-    public void RaiseEvent()
+    [CreateAssetMenu(menuName = "Event Channels/Void")]
+    public class VoidEventChannel : ScriptableObject
     {
-        onEventRaised?.Invoke();
+        public Action onEventRaised;
+
+        [Button("Raise Event", ButtonSizes.Medium)]
+        public void RaiseEvent()
+        {
+            onEventRaised?.Invoke();
+        }
     }
 }

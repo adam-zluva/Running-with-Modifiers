@@ -1,57 +1,31 @@
 using UnityEngine;
 using UnityEngine.Events;
-using EventChannels;
 
 public class LevelManager : MonoBehaviour
 {
-    [SerializeField] private ServiceProvider serviceProvider;
+    public UnityEvent<LevelSet> onLevelSelected;
+    public UnityEvent onLevelBuilt;
     [Space]
-    [SerializeField] private VoidEventChannel gameStartChannel;
-    [SerializeField] private FloatEventChannel platformsSpeedChannel;
+    private ILevelBuilder levelBuilder;
 
-    public UnityEvent<LevelSet> onLevelStart;
-    public UnityEvent onLevelFinished;
-
-    private LevelSet currentLevel;
-    private int _section;
-    private int section
+    private void Awake()
     {
-        get => _section;
-        set
-        {
-            _section = value;
-            if (_section >= currentLevel.levelSections.Length)
-            {
-                onLevelFinished.Invoke();
-            }
-        }
+        levelBuilder = GetComponent<ILevelBuilder>();
     }
 
-    private void OnEnable()
+    public void SelectLevel(LevelSet level)
     {
-        serviceProvider.AddService(this);
+        onLevelSelected.Invoke(level);
     }
 
-    public void PlayLevel(LevelSet level)
+    public void BuildLevel(LevelSet level)
     {
-        currentLevel = level;
-
-        section = 0;
-
-        onLevelStart.Invoke(level);
-        gameStartChannel.RaiseEvent();
-        platformsSpeedChannel.RaiseEvent(currentLevel.levelSpeed);
+        levelBuilder.BuildLevel(level);
+        onLevelBuilt.Invoke();
     }
+}
 
-    public LevelSection GetLevelSection()
-    {
-        if (section < currentLevel.levelSections.Length)
-        {
-            var index = section;
-            section++;
-            return currentLevel.levelSections[index];
-        }
-
-        return null;
-    }
+public interface ILevelBuilder
+{
+    public void BuildLevel(LevelSet level);
 }

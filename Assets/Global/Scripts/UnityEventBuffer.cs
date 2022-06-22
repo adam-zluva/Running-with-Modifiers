@@ -4,17 +4,11 @@ using UnityEngine;
 public class UnityEventBuffer : MonoBehaviour
 {
     [SerializeField] private bool clearOnInvoke;
-    public UnityEvent eventBuffer;
+    [SerializeField] private UnityEvent eventBuffer;
 
-    private void Awake()
+    public void AddListener(UnityAction action)
     {
-        if (clearOnInvoke)
-        {
-            eventBuffer.AddListener(() =>
-            {
-                eventBuffer.RemoveAllListeners();
-            });
-        }
+        eventBuffer.AddListener(action);
     }
 
     public void Invoke()

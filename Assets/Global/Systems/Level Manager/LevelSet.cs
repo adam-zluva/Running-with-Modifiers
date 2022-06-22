@@ -3,9 +3,6 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Level Set")]
 public class LevelSet : ScriptableObject, ISerializationCallbackReceiver
 {
-    [SerializeField] private float _levelSpeed;
-    public float levelSpeed => _levelSpeed;
-
     [SerializeField] private int _startingPlayerUnits = 1;
     public int startingPlayerUnits { get => _startingPlayerUnits; private set => _startingPlayerUnits = value; }
 
