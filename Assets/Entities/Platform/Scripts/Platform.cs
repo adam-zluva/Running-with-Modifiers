@@ -40,6 +40,8 @@ public class Platform : MonoBehaviour
 
     void SetUnits(int count)
     {
+        unitGroup.Clear();
+
         for (int i = 0; i < count; i++)
         {
             Vector3 unitCircle = new Vector3(Random.value, 0f, Random.value).Clamp(1f);

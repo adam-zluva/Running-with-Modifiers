@@ -13,7 +13,11 @@ public class UnitGroup : MonoBehaviour
 
     public void Clear()
     {
-        _units?.Clear();
+        units.ForEach(unit =>
+        {
+            unit.Dispose();
+        });
+        units.Clear();
     }
 
     public void AddUnit(Unit unit)

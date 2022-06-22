@@ -17,6 +17,7 @@ public class Unit : MonoBehaviour
     public void Init()
     {
         dead = false;
+        mover.SetTarget(null);
     }
 
     public void StartEncounter(UnitGroup enemyGroup)
@@ -79,6 +80,11 @@ public class Unit : MonoBehaviour
 
         dead = true;
         onUnitDeath.Invoke();
+        Dispose();
+    }
+
+    public void Dispose()
+    {
         onUnitDeath.RemoveAllListeners();
         pool.ReturnObject(gameObject);
     }

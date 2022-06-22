@@ -5,6 +5,7 @@ public class LevelManager : MonoBehaviour
 {
     public UnityEvent<LevelSet> onLevelSelected;
     public UnityEvent onLevelBuilt;
+    public UnityEvent onLevelQuit;
     [Space]
     private ILevelBuilder levelBuilder;
 
@@ -22,6 +23,11 @@ public class LevelManager : MonoBehaviour
     {
         levelBuilder.BuildLevel(level);
         onLevelBuilt.Invoke();
+    }
+
+    public void QuitLevel()
+    {
+        onLevelQuit.Invoke();
     }
 }
 

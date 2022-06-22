@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7684560763003866189}
   - component: {fileID: 2832538627956654813}
   - component: {fileID: 581509193337024672}
+  - component: {fileID: 295209544759199235}
   m_Layer: 0
   m_Name: Additional Logic
   m_TagString: Untagged
@@ -88,6 +89,46 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
+        m_CallState: 2
+--- !u!114 &295209544759199235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 347489524813896492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b332ba4b93e8fd49b5b814b005e837f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventChannel: {fileID: 11400000, guid: 8bc4849aac057d749914ab0d26d5c4eb, type: 2}
+  onEventRaised:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1742552797360194594}
+        m_TargetAssemblyTypeName: UnitGroup, Core
+        m_MethodName: Clear
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: 61ae2285c56831940a1dcd3823e4220b, type: 2}
+        m_TargetAssemblyTypeName: GameObjectPool, Core
+        m_MethodName: ReturnObject
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 7393151597975451066}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &7393151597444055700
 GameObject:

@@ -39,4 +39,17 @@ public static class ExtensionMethods
             action.Invoke(item);
         }
     }
+
+    public static void BackwardsFor<T>(this List<T> arr, UnityAction<T> action)
+    {
+        for (int i = 0; i < arr.Count; i++)
+        {
+            action.Invoke(arr[arr.Count - 1]);
+        }
+    }
+
+    public static float Remap(this float v, float from, float to, float newFrom, float newTo)
+    {
+        return Mathf.Lerp(newFrom, newTo, Mathf.InverseLerp(from, to, v));
+    }
 }

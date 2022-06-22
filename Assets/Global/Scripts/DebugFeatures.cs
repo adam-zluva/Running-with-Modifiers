@@ -8,4 +8,9 @@ public class DebugFeatures : MonoBehaviour
     {
         Debug.Log(msg);
     }
+
+    public void Log(float number)
+    {
+        Debug.Log(number);
+    }
 }
