@@ -5,38 +5,58 @@ using UnityEngine.Events;
 public class UnitGroup : MonoBehaviour
 {
     [SerializeField] private PoolSpawner poolSpawner;
-    [SerializeField] private UnityEvent onGroupEmpty;
+
+    public UnityEvent onGroupEmpty;
 
     private List<Unit> _units = new List<Unit>();
-    public List<Unit> units => _units;
-    public int numberOfUnits => units.Count;
+    private List<Unit> _activeUnits = new List<Unit>();
+    private List<Unit> _deadUnits = new List<Unit>();
 
-    public void Clear()
+    public List<Unit> units => _units;
+    public List<Unit> activeUnits => _activeUnits;
+    private List<Unit> deadUnits => _deadUnits;
+
+    public int numberOfUnits => activeUnits.Count;
+
+    public void StartEncounter(UnitGroup enemyGroup)
     {
-        units.ForEach(unit =>
+        activeUnits.ForEach(unit => unit.StartEncounter(enemyGroup.activeUnits));
+    }
+
+    public void EndEncounter()
+    {
+        activeUnits.ForEach(unit => unit.EndEncounter());
+    }
+
+    public void Dispose()
+    {
+        units.ForEach(unit => unit.Dispose());
+
+        _units = new List<Unit>();
+        _activeUnits = new List<Unit>();
+        _deadUnits = new List<Unit>();
+    }
+
+    public void RemoveUnit(Unit unit)
+    {
+        activeUnits.Remove(unit);
+        deadUnits.Add(unit);
+
+        if (activeUnits.Count == 0)
         {
-            unit.Dispose();
-        });
-        units.Clear();
+            onGroupEmpty.Invoke();
+        }
     }
 
     public void AddUnit(Unit unit)
     {
         units.Add(unit);
-        unit.onUnitDeath.AddListener(() =>
+        activeUnits.Add(unit);
+        unit.onDeath.AddListener(() =>
         {
+            unit.EndEncounter();
             RemoveUnit(unit);
         });
-    }
-
-    public void RemoveUnit(Unit unit)
-    {
-        units.Remove(unit);
-
-        if (_units.Count == 0)
-        {
-            onGroupEmpty.Invoke();
-        }
     }
 
     public GameObject SpawnUnit(Vector3 position, bool worldSpace = false)
@@ -51,7 +71,7 @@ public class UnitGroup : MonoBehaviour
         return unitObj;
     }
 
-    public void HandleExpression(Vector3 worldPosition, MathExpression expression)
+    public void HandleExpression(Vector3 localPosition, MathExpression expression)
     {
         int newUnitCount = (int)expression.operation.Calculate(numberOfUnits, expression.value);
         int unitsNeeded = Mathf.Abs(newUnitCount - numberOfUnits);
@@ -61,15 +81,14 @@ public class UnitGroup : MonoBehaviour
             for (int i = 0; i < unitsNeeded; i++)
             {
                 Vector3 offset = new Vector3(Random.value, 0f, Random.value).Clamp(0.25f);
-                var unit = SpawnUnit(worldPosition + offset, true);
+                var unit = SpawnUnit(localPosition + offset, false);
             }
         } else if (newUnitCount < numberOfUnits)
         {
             for (int i = 0; i < unitsNeeded; i++)
             {
                 var unit = units[units.Count - 1];
-                RemoveUnit(unit);
-                unit.Dispose();
+                unit.Death();
             }
         }
     }

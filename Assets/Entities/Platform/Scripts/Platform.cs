@@ -11,24 +11,31 @@ public class Platform : MonoBehaviour
     public UnityEvent onGatePassed;
     public UnityEvent onEnconterStarted;
     public UnityEvent onEnconterEnded;
+    public UnityEvent onDispose;
 
     public void StartEncounter()
     {
-        unitGroup.units.ForEach(unit => unit.StartEncounter(playerUnitGroup.value));
-        playerUnitGroup.value.units.ForEach(unit => unit.StartEncounter(unitGroup));
-
         onEnconterStarted.Invoke();
+        unitGroup.StartEncounter(playerUnitGroup.value);
+        playerUnitGroup.value.StartEncounter(unitGroup);
     }
 
     public void EndEncounter()
     {
         onEnconterEnded.Invoke();
+        unitGroup.EndEncounter();
+        playerUnitGroup.value.EndEncounter();
     }
 
     public void GatePassed(Vector3 position, MathExpression expression)
     {
         playerUnitGroup.value.HandleExpression(position, expression);
         onGatePassed.Invoke();
+    }
+
+    public void Dispose()
+    {
+        onDispose.Invoke();
     }
 
     public void SetSection(LevelSection section)
@@ -40,12 +47,6 @@ public class Platform : MonoBehaviour
 
     void SetUnits(int count)
     {
-        unitGroup.Clear();
-
-        for (int i = 0; i < count; i++)
-        {
-            Vector3 unitCircle = new Vector3(Random.value, 0f, Random.value).Clamp(1f);
-            unitGroup.SpawnUnit(unitCircle);
-        }
+        unitGroup.HandleExpression(Vector3.zero, new MathExpression(MathExpression.Operation.Addition, count));
     }
 }

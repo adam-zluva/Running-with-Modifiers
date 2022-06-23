@@ -29,6 +29,6 @@ public class GameObjectPool : ScriptableObject
 
     public void Dispose()
     {
-        pool.Dispose();
+        pool?.Dispose();
     }
 }

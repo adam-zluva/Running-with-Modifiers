@@ -28,10 +28,15 @@ public class ObjectMover : MonoBehaviour
         movementAction?.Invoke();
     }
 
+    public void ResetTarget()
+    {
+        followTarget.BuildReferenceValue();
+    }
+
     public void SetTarget(Transform target)
     {
         if (target != null) followTarget.value = target;
-        else followTarget.BuildReferenceValue();
+        else ResetTarget();
     }
 
     public void TeleportTo(Vector3 worldPosition)

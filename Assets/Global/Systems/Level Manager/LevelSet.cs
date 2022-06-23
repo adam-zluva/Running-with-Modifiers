@@ -44,6 +44,12 @@ public class MathExpression
     private float _value;
     public float value => _value;
 
+    public MathExpression(Operation operation, float value)
+    {
+        _operation = operation;
+        _value = value;
+    }
+
     public enum Operation
     {
         Addition, Subtraction, Multiplication, Division

@@ -22,10 +22,8 @@ public class LevelBuilder : MonoBehaviour, ILevelBuilder
             localPosition += Vector3.forward * platformSpacing;
         }
 
-        for (int i = 0; i < level.startingPlayerUnits; i++)
-        {
-            playerUnitGroup.SpawnUnit(Vector3.zero);
-        }
+        playerUnitGroup.HandleExpression(Vector3.zero,
+            new MathExpression(MathExpression.Operation.Addition, level.startingPlayerUnits));
     }
 
     public GameObject SpawnPlatform(Vector3 localPosition)

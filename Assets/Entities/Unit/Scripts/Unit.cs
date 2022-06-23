@@ -4,40 +4,46 @@ using UnityEngine.Events;
 
 public class Unit : MonoBehaviour
 {
-    [SerializeField] private GameObjectPool pool;
-    public UnityEvent onUnitDeath;
     [SerializeField] private ObjectMover mover;
     [SerializeField] private string enemyTag;
 
-    private GameObject currentTarget;
-    private List<Unit> targets;
+    public UnityEvent onInit;
+    public UnityEvent onDeath;
+    public UnityEvent onDispose;
+    public UnityEvent onEncounterStart;
+    public UnityEvent onEncounterEnd;
 
-    private bool dead;
+    private List<Unit> targets;
 
     public void Init()
     {
-        dead = false;
-        mover.SetTarget(null);
+        onInit.RemoveAllListeners();
+        onDeath.RemoveAllListeners();
+        onDispose.RemoveAllListeners();
+
+        onInit.Invoke();
     }
 
-    public void StartEncounter(UnitGroup enemyGroup)
+    public void Death()
     {
-        targets = new List<Unit>(enemyGroup.units);
+        onDeath.Invoke();
+    }
 
-        foreach (var target in targets)
-        {
-            target.onUnitDeath.AddListener(() =>
-            {
-                targets.Remove(target);
-            });
-        }
+    public void Dispose()
+    {
+        onDispose.Invoke();
+    }
 
-        SetTarget(GetNearestUnit());
+    public void StartEncounter(List<Unit> targets)
+    {
+        onEncounterStart.Invoke();
+        this.targets = targets;
+        SetTarget(GetNearestTarget());
     }
 
     public void EndEncounter()
     {
-        mover.SetTarget(null);
+        onEncounterEnd.Invoke();
     }
 
     public void SetTarget(Unit target)
@@ -48,45 +54,29 @@ public class Unit : MonoBehaviour
             return;
         }
 
-        currentTarget = target.gameObject;
-        target.onUnitDeath.AddListener(() =>
+        target.onDeath.AddListener(() =>
         {
-            SetTarget(GetNearestUnit());
+            targets.Remove(target);
+            SetTarget(GetNearestTarget());
         });
-        mover.SetTarget(currentTarget.transform);
-        mover.enabled = true;
+        mover.SetTarget(target.transform);
     }
 
-    private Unit GetNearestUnit()
+    private Unit GetNearestTarget()
     {
-        float nearestDist = Mathf.Infinity;
-        Unit unit = null;
+        Unit nearestUnit = null;
+        float nearestDistance = Mathf.Infinity;
         foreach (var target in targets)
         {
-            float dist = Vector3.Distance(transform.position, target.transform.position);
-            if (dist < nearestDist)
+            float distance = Vector3.Distance(transform.position, target.transform.position);
+            if (distance < nearestDistance)
             {
-                nearestDist = dist;
-                unit = target;
+                nearestUnit = target;
+                nearestDistance = distance;
             }
         }
 
-        return unit;
-    }
-
-    public void Death()
-    {
-        if (dead) return;
-
-        dead = true;
-        onUnitDeath.Invoke();
-        Dispose();
-    }
-
-    public void Dispose()
-    {
-        onUnitDeath.RemoveAllListeners();
-        pool.ReturnObject(gameObject);
+        return nearestUnit;
     }
 
     private void OnTriggerEnter(Collider other)
