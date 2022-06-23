@@ -1104,13 +1104,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9d989595d0703d49825b45dc928adbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementTargetSpeed: 2
   movementTarget: {fileID: 1287977192}
   moveTargetBounds: {x: -4, y: 4}
   cameraTarget: {fileID: 1210811466}
-  camTargetBounds: {x: -2.5, y: 2.5}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!114 &511969695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2135,6 +2132,37 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1518414613350042940}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1266740421
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1266740422}
+  m_Layer: 0
+  m_Name: Units Face Target
+  m_TagString: PlayerFaceTarget
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1266740422
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1266740421}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1287977192}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1287977191
 GameObject:
   m_ObjectHideFlags: 0
@@ -2162,7 +2190,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1266740422}
   m_Father: {fileID: 511969693}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3029,6 +3058,7 @@ GameObject:
   - component: {fileID: 2051908150}
   - component: {fileID: 2051908151}
   - component: {fileID: 2051908153}
+  - component: {fileID: 2051908154}
   m_Layer: 0
   m_Name: Input Parser
   m_TagString: Untagged
@@ -3078,7 +3108,7 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: Touch
   m_DefaultActionMap: Gameplay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -3095,12 +3125,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementActionName: Movement
-  onPlayerInput:
+  touchActionName: Touch
+  onInputDown:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2051908154}
+        m_TargetAssemblyTypeName: DebugFeatures, Core
+        m_MethodName: Log
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Down
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 511969694}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  onInput:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 511969694}
         m_TargetAssemblyTypeName: Controller, Core
-        m_MethodName: set_position
+        m_MethodName: set_touchAxis
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3110,6 +3168,45 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onInputUp:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 511969694}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2051908154}
+        m_TargetAssemblyTypeName: DebugFeatures, Core
+        m_MethodName: Log
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Up
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2051908154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2051908149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3bf4dd179a33c646a2823934a6472fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1518414613350042940
 PrefabInstance:
   m_ObjectHideFlags: 0

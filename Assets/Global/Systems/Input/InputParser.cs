@@ -6,21 +6,35 @@ using UnityEngine.Events;
 public class InputParser : MonoBehaviour
 {
     [SerializeField] private string movementActionName = "Movement";
-    [SerializeField] private UnityEvent<Vector2> onPlayerInput;
+    [SerializeField] private string touchActionName = "Touch";
+    [Space]
+    [SerializeField] private UnityEvent onInputDown;
+    [SerializeField] private UnityEvent<float> onInput;
+    [SerializeField] private UnityEvent onInputUp;
 
     private PlayerInput playerInput;
 
     private InputAction movementAction;
+    private InputAction touchAction;
 
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
 
         movementAction = playerInput.actions[movementActionName];
+        touchAction = playerInput.actions[touchActionName];
+
         movementAction.performed += ctx =>
         {
-            Vector2 input = ctx.ReadValue<Vector2>();
-            onPlayerInput.Invoke(input);
+            onInput.Invoke(ctx.ReadValue<float>());
+        };
+        touchAction.started += ctx =>
+        {
+            onInputDown.Invoke();
+        };
+        touchAction.canceled += ctx =>
+        {
+            onInputUp.Invoke();
         };
     }
 }

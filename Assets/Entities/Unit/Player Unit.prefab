@@ -275,7 +275,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e305fed451b35f41b8ad718cbb63eab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mover: {fileID: 1618946137635178511}
   enemyTag: EnemyUnit
   onInit:
     m_PersistentCalls:
@@ -320,6 +319,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
         m_MethodName: set_enabled
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 101001309879795975}
+        m_TargetAssemblyTypeName: FaceTarget, Core
+        m_MethodName: ResetTarget
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -427,6 +438,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 101001309879795975}
+        m_TargetAssemblyTypeName: FaceTarget, Core
+        m_MethodName: SetTarget
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 6122467011746149684}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   onDispose:
     m_PersistentCalls:
       m_Calls:
@@ -445,11 +468,50 @@ MonoBehaviour:
   onEncounterStart:
     m_PersistentCalls:
       m_Calls: []
+  onTargetSet:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1618946137635178511}
+        m_TargetAssemblyTypeName: ObjectMover, Core
+        m_MethodName: SetTarget
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 101001309879795975}
+        m_TargetAssemblyTypeName: FaceTarget, Core
+        m_MethodName: SetTarget
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onEncounterEnd:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1618946137635178511}
         m_TargetAssemblyTypeName: ObjectMover, Core
+        m_MethodName: ResetTarget
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 101001309879795975}
+        m_TargetAssemblyTypeName: FaceTarget, Core
         m_MethodName: ResetTarget
         m_Mode: 1
         m_Arguments:
@@ -479,7 +541,8 @@ MonoBehaviour:
     referenceType: 1
     assignedTransform: {fileID: 0}
     searchTag: PlayerFollowPoint
-  _speedMultiplier: 5000
+  speed: 5000
+  _speedMultiplier: 1
 --- !u!114 &8758361867502197500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -499,6 +562,7 @@ MonoBehaviour:
     referenceType: 0
     assignedTransform: {fileID: 0}
     searchTag: 
+  speed: 1
   _speedMultiplier: 1
 --- !u!54 &18209918004459740
 Rigidbody:
@@ -537,6 +601,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6122467013368998975}
+  - component: {fileID: 101001309879795975}
   m_Layer: 6
   m_Name: GFX
   m_TagString: Untagged
@@ -560,6 +625,25 @@ Transform:
   m_Father: {fileID: 6122467011746149684}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &101001309879795975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6122467013368998974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58fadd2362e2285489cf353278c78d9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetReference:
+    referenceType: 1
+    assignedTransform: {fileID: 0}
+    searchTag: PlayerFaceTarget
+  defaultFaceDirection: {x: 0, y: 0, z: 1}
+  directionMultiplier: {x: 1, y: 0, z: 1}
+  steerSmoothTime: 0.5
 --- !u!1001 &4147148693459076895
 PrefabInstance:
   m_ObjectHideFlags: 0

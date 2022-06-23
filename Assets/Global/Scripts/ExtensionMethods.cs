@@ -86,4 +86,9 @@ public static class ExtensionMethods
                 return leftSide;
         }
     }
+
+    public static Vector3 Multiply(this Vector3 vector, Vector3 otherVector)
+    {
+        return new Vector3(vector.x * otherVector.x, vector.y * otherVector.y, vector.z * otherVector.z);
+    }
 }

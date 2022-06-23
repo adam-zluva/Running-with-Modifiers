@@ -11,6 +11,7 @@ public class ObjectMover : MonoBehaviour
     [SerializeField, ShowIf("movementType", MovementType.Translation)] private Vector3 moveDirection;
     [SerializeField, ShowIf("movementType", MovementType.Target)] private Reference<Transform> followTarget;
     [Space]
+    [SerializeField] private float speed = 1f;
     [SerializeField] private float _speedMultiplier = 1f;
     public float speedMultiplier { get => _speedMultiplier; set => _speedMultiplier = value; }
 
@@ -56,23 +57,23 @@ public class ObjectMover : MonoBehaviour
             case MovementType.Translation:
                 movementAction = useRigidbody ? () =>
                 {
-                    rb.MovePosition(rb.position + moveDirection * speedMultiplier * Time.deltaTime);
+                    rb.MovePosition(rb.position + moveDirection * speed * speedMultiplier * Time.deltaTime);
                 }
                 : () =>
                 {
-                    transform.Translate(moveDirection * speedMultiplier * Time.deltaTime);
+                    transform.Translate(moveDirection * speed * speedMultiplier * Time.deltaTime);
                 };
                 break;
             case MovementType.Target:
                 movementAction = useRigidbody ? () =>
                 {
-                    Vector3 direction = (followTarget.value.position - transform.position).Clamp(1f);
-                    rb.AddForce(direction * speedMultiplier * Time.deltaTime, ForceMode.Acceleration);
+                    Vector3 direction = (followTarget.value.position - transform.position).normalized;
+                    rb.AddForce(direction * speed * speedMultiplier * Time.deltaTime, ForceMode.Acceleration);
                 }
                 : () =>
                 {
-                    Vector3 direction = (followTarget.value.position - transform.position).Clamp(1f);
-                    transform.Translate(direction * speedMultiplier * Time.deltaTime);
+                    Vector3 direction = (followTarget.value.position - transform.position).normalized;
+                    transform.Translate(direction * speed * speedMultiplier * Time.deltaTime);
                 };
                 break;
         }

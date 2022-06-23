@@ -4,16 +4,17 @@ using UnityEngine.Events;
 
 public class Unit : MonoBehaviour
 {
-    [SerializeField] private ObjectMover mover;
     [SerializeField] private string enemyTag;
 
     public UnityEvent onInit;
     public UnityEvent onDeath;
     public UnityEvent onDispose;
     public UnityEvent onEncounterStart;
+    public UnityEvent<Transform> onTargetSet;
     public UnityEvent onEncounterEnd;
 
     private List<Unit> targets;
+    private bool dead;
 
     public void Init()
     {
@@ -22,11 +23,15 @@ public class Unit : MonoBehaviour
         onDispose.RemoveAllListeners();
 
         onInit.Invoke();
+        dead = false;
     }
 
     public void Death()
     {
+        if (dead) return;
+
         onDeath.Invoke();
+        dead = true;
     }
 
     public void Dispose()
@@ -48,6 +53,7 @@ public class Unit : MonoBehaviour
 
     public void SetTarget(Unit target)
     {
+        if (dead) return;
         if (target == null)
         {
             EndEncounter();
@@ -59,7 +65,7 @@ public class Unit : MonoBehaviour
             targets.Remove(target);
             SetTarget(GetNearestTarget());
         });
-        mover.SetTarget(target.transform);
+        onTargetSet.Invoke(target.transform);
     }
 
     private Unit GetNearestTarget()

@@ -32,6 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7181140210577721018}
+  - {fileID: 4829330988675017624}
   m_Father: {fileID: 7393151597975451065}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -339,7 +340,6 @@ GameObject:
   - component: {fileID: 1742552797360194594}
   - component: {fileID: 5373439752323475598}
   - component: {fileID: 222957581129929464}
-  - component: {fileID: 2496457850349797115}
   m_Layer: 0
   m_Name: Platform
   m_TagString: Untagged
@@ -403,7 +403,7 @@ MonoBehaviour:
   onEnconterStarted:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2496457850349797115}
+      - m_Target: {fileID: 6997980896648159876}
         m_TargetAssemblyTypeName: AsyncEventSequence, Core
         m_MethodName: StartSequence
         m_Mode: 1
@@ -418,9 +418,9 @@ MonoBehaviour:
   onEnconterEnded:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 13d1de124bbd51e4fa48c6fad1817475, type: 2}
-        m_TargetAssemblyTypeName: EventChannels.VoidEventChannel, Core
-        m_MethodName: RaiseEvent
+      - m_Target: {fileID: 5817152831951883204}
+        m_TargetAssemblyTypeName: AsyncEventSequence, Core
+        m_MethodName: StartSequence
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -433,18 +433,6 @@ MonoBehaviour:
   onDispose:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5262251973632672404}
-        m_TargetAssemblyTypeName: Platform, Core
-        m_MethodName: EndEncounter
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1742552797360194594}
         m_TargetAssemblyTypeName: UnitGroup, Core
         m_MethodName: Dispose
@@ -530,36 +518,8 @@ MonoBehaviour:
     referenceType: 0
     assignedTransform: {fileID: 0}
     searchTag: 
+  speed: 1
   _speedMultiplier: 1
---- !u!114 &2496457850349797115
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7393151597975451066}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecea6e12c7408834faa85afea93fa265, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sequence:
-  - _delay: 0.5
-    onInvoke:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 11400000, guid: 4a7b5a06b43f046478a7a9d1bd5493c0, type: 2}
-          m_TargetAssemblyTypeName: EventChannels.VoidEventChannel, Core
-          m_MethodName: RaiseEvent
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1 &7393151598185639754
 GameObject:
   m_ObjectHideFlags: 0
@@ -707,6 +667,97 @@ Transform:
   m_Father: {fileID: 7393151597975451065}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8458530826808757192
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4829330988675017624}
+  - component: {fileID: 6997980896648159876}
+  - component: {fileID: 5817152831951883204}
+  m_Layer: 0
+  m_Name: Encounter Start & End
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4829330988675017624
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8458530826808757192}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7684560763003866189}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6997980896648159876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8458530826808757192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecea6e12c7408834faa85afea93fa265, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sequence:
+  - _delay: 0.25
+    onInvoke:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: 4a7b5a06b43f046478a7a9d1bd5493c0, type: 2}
+          m_TargetAssemblyTypeName: EventChannels.VoidEventChannel, Core
+          m_MethodName: RaiseEvent
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &5817152831951883204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8458530826808757192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecea6e12c7408834faa85afea93fa265, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sequence:
+  - _delay: 0.1
+    onInvoke:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: 13d1de124bbd51e4fa48c6fad1817475, type: 2}
+          m_TargetAssemblyTypeName: EventChannels.VoidEventChannel, Core
+          m_MethodName: RaiseEvent
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &9020072222703343276
 GameObject:
   m_ObjectHideFlags: 0
