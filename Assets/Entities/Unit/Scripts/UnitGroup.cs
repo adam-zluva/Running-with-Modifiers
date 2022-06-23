@@ -54,7 +54,6 @@ public class UnitGroup : MonoBehaviour
         activeUnits.Add(unit);
         unit.onDeath.AddListener(() =>
         {
-            unit.EndEncounter();
             RemoveUnit(unit);
         });
     }
@@ -87,7 +86,7 @@ public class UnitGroup : MonoBehaviour
         {
             for (int i = 0; i < unitsNeeded; i++)
             {
-                var unit = units[units.Count - 1];
+                var unit = activeUnits[numberOfUnits - 1];
                 unit.Death();
             }
         }

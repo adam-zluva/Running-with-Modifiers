@@ -22,3 +22,35 @@ MonoBehaviour:
       _value: 4
     _enemies: 7
     lastSection: 1
+  - _expressionA:
+      _operation: 2
+      _value: 4
+    _expressionB:
+      _operation: 1
+      _value: 1
+    _enemies: 3
+    lastSection: 1
+  - _expressionA:
+      _operation: 0
+      _value: 5
+    _expressionB:
+      _operation: 3
+      _value: 2
+    _enemies: 6
+    lastSection: 1
+  - _expressionA:
+      _operation: 0
+      _value: 6
+    _expressionB:
+      _operation: 1
+      _value: 2
+    _enemies: 5
+    lastSection: 1
+  - _expressionA:
+      _operation: 2
+      _value: 5
+    _expressionB:
+      _operation: 0
+      _value: 10
+    _enemies: 17
+    lastSection: 1

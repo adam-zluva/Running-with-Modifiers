@@ -1,40 +1,28 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(PlayerInput))]
 public class InputParser : MonoBehaviour
 {
-    [SerializeField] private string movementActionName = "Movement";
-    [SerializeField] private string touchActionName = "Touch";
-    [Space]
     [SerializeField] private UnityEvent onInputDown;
     [SerializeField] private UnityEvent<float> onInput;
     [SerializeField] private UnityEvent onInputUp;
 
-    private PlayerInput playerInput;
-
-    private InputAction movementAction;
-    private InputAction touchAction;
-
-    private void Awake()
+    private void Update()
     {
-        playerInput = GetComponent<PlayerInput>();
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
 
-        movementAction = playerInput.actions[movementActionName];
-        touchAction = playerInput.actions[touchActionName];
-
-        movementAction.performed += ctx =>
-        {
-            onInput.Invoke(ctx.ReadValue<float>());
-        };
-        touchAction.started += ctx =>
-        {
-            onInputDown.Invoke();
-        };
-        touchAction.canceled += ctx =>
-        {
-            onInputUp.Invoke();
-        };
+            if (touch.phase == TouchPhase.Began)
+            {
+                onInputDown.Invoke();
+            } else if (touch.phase == TouchPhase.Ended)
+            {
+                onInputUp.Invoke();
+            } else if (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary)
+            {
+                onInput.Invoke(touch.position.x);
+            }
+        }
     }
 }
