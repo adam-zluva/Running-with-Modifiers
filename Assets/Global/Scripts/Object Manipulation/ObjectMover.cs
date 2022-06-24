@@ -9,13 +9,19 @@ public class ObjectMover : MonoBehaviour
     [Space]
     [SerializeField] private MovementType movementType;
     [SerializeField, ShowIf("movementType", MovementType.Translation)] private Vector3 moveDirection;
-    [SerializeField, ShowIf("movementType", MovementType.Target)] private Reference<Transform> followTarget;
+
+    [SerializeField,
+        ShowIf("@this.movementType == MovementType.Target || this.movementType == MovementType.SmoothTarget")]
+        private Reference<Transform> followTarget;
+
+    [SerializeField, ShowIf("movementType", MovementType.SmoothTarget)] private float smoothTime;
+    private Vector3 smoothVelocity;
+    private UnityAction movementAction;
     [Space]
     [SerializeField] private float speed = 1f;
     [SerializeField] private float _speedMultiplier = 1f;
     public float speedMultiplier { get => _speedMultiplier; set => _speedMultiplier = value; }
 
-    private UnityAction movementAction;
     private Rigidbody rb;
 
     private void Awake()
@@ -76,11 +82,20 @@ public class ObjectMover : MonoBehaviour
                     transform.Translate(direction * speed * speedMultiplier * Time.deltaTime);
                 };
                 break;
+            case MovementType.SmoothTarget:
+                if (useRigidbody) Debug.LogWarning("Can't move using Rigidbody when 'Smooth Target' movement mode is used");
+                movementAction = () =>
+                {
+                    Vector3 targetPosition = followTarget.value.position;
+                    Vector3 pos = Vector3.SmoothDamp(transform.position, targetPosition, ref smoothVelocity, smoothTime);
+                    transform.position = pos;
+                };
+                break;
         }
     }
 
     public enum MovementType
     {
-        Translation, Target
+        Translation, Target, SmoothTarget
     }
 }

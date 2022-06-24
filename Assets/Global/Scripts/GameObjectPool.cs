@@ -32,7 +32,7 @@ public class GameObjectPool : ScriptableObject
 
         for (int i = 0; i < startingCapacity; i++)
         {
-            pool.Release(pooledObjects[i]);
+            ReturnObject(pooledObjects[i]);
         }
     }
 

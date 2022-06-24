@@ -5,7 +5,6 @@ using UnityEngine;
 public class FaceTarget : MonoBehaviour
 {
     [SerializeField] private Reference<Transform> targetReference;
-    private Transform target => targetReference.value;
 
     [SerializeField] private bool transformTargetToLocal;
 
@@ -23,7 +22,7 @@ public class FaceTarget : MonoBehaviour
 
     private void Update()
     {
-        Vector3 targetPosition = target.position;
+        Vector3 targetPosition = targetReference.value.position;
         Vector3 direction = (targetPosition - transform.position).Multiply(directionMultiplier);
         if (direction == Vector3.zero) direction = lastValidDirection;
 

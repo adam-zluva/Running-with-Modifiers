@@ -1,12 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using TMPro;
 
 public class UnitGroup : MonoBehaviour
 {
     [SerializeField] private PoolSpawner poolSpawner;
+    [SerializeField] private CenterPointSolver centerPointSolver;
+    [SerializeField] private TextMeshProUGUI unitPowerText;
 
     public UnityEvent onGroupEmpty;
+    public UnityEvent<int> onUnitCountChanged;
 
     private List<Unit> _units = new List<Unit>();
     private List<Unit> _activeUnits = new List<Unit>();
@@ -35,6 +39,7 @@ public class UnitGroup : MonoBehaviour
         _units = new List<Unit>();
         _activeUnits = new List<Unit>();
         _deadUnits = new List<Unit>();
+        onUnitCountChanged.Invoke(numberOfUnits);
     }
 
     public void RemoveUnit(Unit unit)
@@ -42,6 +47,7 @@ public class UnitGroup : MonoBehaviour
         activeUnits.Remove(unit);
         deadUnits.Add(unit);
 
+        onUnitCountChanged.Invoke(numberOfUnits);
         if (activeUnits.Count == 0)
         {
             onGroupEmpty.Invoke();
@@ -53,6 +59,7 @@ public class UnitGroup : MonoBehaviour
         units.Remove(unit);
         activeUnits.Remove(unit);
         deadUnits.Remove(unit);
+        onUnitCountChanged.Invoke(numberOfUnits);
     }
 
     public void AddUnit(Unit unit)
@@ -64,6 +71,7 @@ public class UnitGroup : MonoBehaviour
         {
             RemoveUnit(unit);
         });
+        onUnitCountChanged.Invoke(numberOfUnits);
     }
 
     public GameObject SpawnUnit(Vector3 position, bool worldSpace = false)
@@ -98,5 +106,19 @@ public class UnitGroup : MonoBehaviour
                 unit.Death();
             }
         }
+    }
+
+    public void CalculateCenterPoint()
+    {
+        List<Transform> activeUnitTransforms = new List<Transform>();
+        activeUnits.ForEach(unit => activeUnitTransforms.Add(unit.transform));
+
+        centerPointSolver.CalculateCenterPoint(activeUnitTransforms);
+    }
+
+    public void UpdateUnitPowerText(int newPower)
+    {
+        unitPowerText.gameObject.SetActive(newPower > 0);
+        unitPowerText.text = $"{newPower}";
     }
 }
