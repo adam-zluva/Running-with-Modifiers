@@ -43,7 +43,7 @@ CapsuleCollider:
   m_Material: {fileID: 13400000, guid: f9fc9e408362c1e4c8243f88b15b79fd, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.3
+  m_Radius: 0.35
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0.5, z: 0}
@@ -57,7 +57,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.35
+  m_Radius: 0.4
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0.5, z: 0}
@@ -460,6 +460,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1343150315740651027}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Stand
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6975696614910091488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -546,6 +558,7 @@ MonoBehaviour:
     referenceType: 0
     assignedTransform: {fileID: 6122467011746149684}
     searchTag: 
+  transformTargetToLocal: 0
   defaultFaceDirection: {x: 0, y: 0, z: -1}
   directionMultiplier: {x: 1, y: 0, z: 1}
   steerSmoothTime: 0.5
@@ -565,6 +578,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7884535617625890485, guid: 4a3c491e1ca71e041b4e665b8aa59ea7,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7884535617625890485, guid: 4a3c491e1ca71e041b4e665b8aa59ea7,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7884535617625890485, guid: 4a3c491e1ca71e041b4e665b8aa59ea7,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 7884535617625890485, guid: 4a3c491e1ca71e041b4e665b8aa59ea7,
         type: 3}

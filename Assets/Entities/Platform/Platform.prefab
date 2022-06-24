@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7684560763003866189}
   - component: {fileID: 2832538627956654813}
   - component: {fileID: 581509193337024672}
-  - component: {fileID: 295209544759199235}
   m_Layer: 0
   m_Name: Additional Logic
   m_TagString: Untagged
@@ -91,34 +90,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
-        m_CallState: 2
---- !u!114 &295209544759199235
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 347489524813896492}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b332ba4b93e8fd49b5b814b005e837f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  eventChannel: {fileID: 11400000, guid: 8bc4849aac057d749914ab0d26d5c4eb, type: 2}
-  onEventRaised:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5262251973632672404}
-        m_TargetAssemblyTypeName: Platform, Core
-        m_MethodName: Dispose
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &4460829056658349385
 GameObject:
@@ -340,6 +311,7 @@ GameObject:
   - component: {fileID: 1742552797360194594}
   - component: {fileID: 5373439752323475598}
   - component: {fileID: 222957581129929464}
+  - component: {fileID: 7373594355458853615}
   m_Layer: 0
   m_Name: Platform
   m_TagString: Untagged
@@ -385,6 +357,21 @@ MonoBehaviour:
     referenceType: 1
     assignedTransform: {fileID: 0}
     searchTag: PlayerUnitGroup
+  onInit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 222957581129929464}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   onGatePassed:
     m_PersistentCalls:
       m_Calls:
@@ -520,6 +507,48 @@ MonoBehaviour:
     searchTag: 
   speed: 1
   _speedMultiplier: 1
+--- !u!114 &7373594355458853615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7393151597975451066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6359afbe6d4c1a544ba2c3e7ed350823, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onAwake:
+    m_PersistentCalls:
+      m_Calls: []
+  onEnable:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5262251973632672404}
+        m_TargetAssemblyTypeName: Platform, Core
+        m_MethodName: Init
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onStart:
+    m_PersistentCalls:
+      m_Calls: []
+  onUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+  onDisable:
+    m_PersistentCalls:
+      m_Calls: []
+  onDestroy:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7393151598185639754
 GameObject:
   m_ObjectHideFlags: 0
@@ -713,7 +742,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sequence:
-  - _delay: 0.25
+  - _delay: 0
     onInvoke:
       m_PersistentCalls:
         m_Calls:

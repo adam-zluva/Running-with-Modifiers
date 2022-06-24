@@ -10,7 +10,7 @@ public class AsyncEventSequence : MonoBehaviour
 
     public void StartSequence()
     {
-        runningSequence = StartCoroutine(DoSequence());
+        if (isActiveAndEnabled) runningSequence = StartCoroutine(DoSequence());
     }
 
     public void CancelSequence()

@@ -13,6 +13,8 @@ public class Unit : MonoBehaviour
     public UnityEvent<Transform> onTargetSet;
     public UnityEvent onEncounterEnd;
 
+    public UnitGroup parentGroup { get; set; }
+
     private List<Unit> targets;
     private bool dead;
 
@@ -66,6 +68,12 @@ public class Unit : MonoBehaviour
             SetTarget(GetNearestTarget());
         });
         onTargetSet.Invoke(target.transform);
+    }
+
+    public void Unparent()
+    {
+        parentGroup.UnparentUnit(this);
+        parentGroup = null;
     }
 
     private Unit GetNearestTarget()

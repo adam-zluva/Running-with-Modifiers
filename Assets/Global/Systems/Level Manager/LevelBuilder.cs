@@ -14,6 +14,7 @@ public class LevelBuilder : MonoBehaviour, ILevelBuilder
         foreach (var section in level.levelSections)
         {
             GameObject platformObj = SpawnPlatform(localPosition);
+            //Debug.Log($"{platformObj.gameObject.name} - {platformObj.activeInHierarchy}", platformObj.gameObject);
             if (platformObj.TryGetComponent(out Platform platform))
             {
                 platform.SetSection(section);

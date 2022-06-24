@@ -48,8 +48,16 @@ public class UnitGroup : MonoBehaviour
         }
     }
 
+    public void UnparentUnit(Unit unit)
+    {
+        units.Remove(unit);
+        activeUnits.Remove(unit);
+        deadUnits.Remove(unit);
+    }
+
     public void AddUnit(Unit unit)
     {
+        unit.parentGroup = this;
         units.Add(unit);
         activeUnits.Add(unit);
         unit.onDeath.AddListener(() =>

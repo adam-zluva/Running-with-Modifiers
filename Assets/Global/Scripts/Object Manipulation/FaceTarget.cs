@@ -7,6 +7,8 @@ public class FaceTarget : MonoBehaviour
     [SerializeField] private Reference<Transform> targetReference;
     private Transform target => targetReference.value;
 
+    [SerializeField] private bool transformTargetToLocal;
+
     [SerializeField] private Vector3 defaultFaceDirection;
     [SerializeField] private Vector3 directionMultiplier;
     [SerializeField] private float steerSmoothTime = 0f;
@@ -21,7 +23,8 @@ public class FaceTarget : MonoBehaviour
 
     private void Update()
     {
-        Vector3 direction = (target.position - transform.position).Multiply(directionMultiplier);
+        Vector3 targetPosition = target.position;
+        Vector3 direction = (targetPosition - transform.position).Multiply(directionMultiplier);
         if (direction == Vector3.zero) direction = lastValidDirection;
 
         transform.forward = Vector3.SmoothDamp(transform.forward, direction, ref smoothVelocity, steerSmoothTime);

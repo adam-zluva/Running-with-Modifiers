@@ -8,10 +8,16 @@ public class Platform : MonoBehaviour
     [SerializeField] private UnitGroup unitGroup;
     [SerializeField] private Reference<UnitGroup> playerUnitGroup;
 
+    public UnityEvent onInit;
     public UnityEvent onGatePassed;
     public UnityEvent onEnconterStarted;
     public UnityEvent onEnconterEnded;
     public UnityEvent onDispose;
+
+    public void Init()
+    {
+        onInit.Invoke();
+    }
 
     public void StartEncounter()
     {
@@ -40,9 +46,11 @@ public class Platform : MonoBehaviour
 
     public void SetSection(LevelSection section)
     {
+        //Debug.Log($"{gameObject.name} - {gameObject.activeInHierarchy}", gameObject);
         SetUnits(section.enemies);
         gateA.SetGate(section.expressionA);
         gateB.SetGate(section.expressionB);
+        //Debug.Log($"{gameObject.name} - {gameObject.activeInHierarchy}", gameObject);
     }
 
     void SetUnits(int count)

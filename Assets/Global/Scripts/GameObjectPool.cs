@@ -19,7 +19,21 @@ public class GameObjectPool : ScriptableObject
             unit => { unit.SetActive(true); },
             unit => { unit.SetActive(false); },
             unit => { Destroy(unit); },
-            false, startingCapacity);
+            true, startingCapacity);
+
+        var poolParent = new GameObject($"--- {gameObject.name} Pool ---").transform;
+        GameObject[] pooledObjects = new GameObject[startingCapacity];
+        for (int i = 0; i < startingCapacity; i++)
+        {
+            var obj = pool.Get();
+            obj.transform.SetParent(poolParent);
+            pooledObjects[i] = obj;
+        }
+
+        for (int i = 0; i < startingCapacity; i++)
+        {
+            pool.Release(pooledObjects[i]);
+        }
     }
 
     public void ReturnObject(GameObject obj)

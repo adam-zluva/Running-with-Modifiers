@@ -19,7 +19,7 @@ MonoBehaviour:
       _value: 3
     _expressionB:
       _operation: 0
-      _value: 4
+      _value: 3
     _enemies: 7
     lastSection: 1
   - _expressionA:
@@ -48,7 +48,7 @@ MonoBehaviour:
     lastSection: 1
   - _expressionA:
       _operation: 2
-      _value: 5
+      _value: 10
     _expressionB:
       _operation: 0
       _value: 10
