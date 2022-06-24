@@ -632,6 +632,7 @@ MonoBehaviour:
     referenceType: 1
     assignedTransform: {fileID: 0}
     searchTag: PlayerFollowPoint
+  smoothTime: 0
   speed: 5000
   _speedMultiplier: 1
 --- !u!114 &8758361867502197500
@@ -653,6 +654,7 @@ MonoBehaviour:
     referenceType: 0
     assignedTransform: {fileID: 0}
     searchTag: 
+  smoothTime: 0
   speed: 1
   _speedMultiplier: 1
 --- !u!54 &18209918004459740
@@ -747,7 +749,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6fe28931cabb6fe41a644527d706ef6f, type: 2}
+      objectReference: {fileID: 2100000, guid: 6edfe4e0e06444642886e8a8fd407e9f, type: 2}
     - target: {fileID: 7884535617625890485, guid: 4a3c491e1ca71e041b4e665b8aa59ea7,
         type: 3}
       propertyPath: m_RootOrder
@@ -822,6 +824,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Character
+      objectReference: {fileID: 0}
+    - target: {fileID: 7889900315404974205, guid: 4a3c491e1ca71e041b4e665b8aa59ea7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a3c491e1ca71e041b4e665b8aa59ea7, type: 3}

@@ -86,7 +86,8 @@ public class ObjectMover : MonoBehaviour
                 if (useRigidbody) Debug.LogWarning("Can't move using Rigidbody when 'Smooth Target' movement mode is used");
                 movementAction = () =>
                 {
-                    Vector3 targetPosition = followTarget.value.position;
+                    Transform target = followTarget.value;
+                    Vector3 targetPosition = target.position;
                     Vector3 pos = Vector3.SmoothDamp(transform.position, targetPosition, ref smoothVelocity, smoothTime);
                     transform.position = pos;
                 };

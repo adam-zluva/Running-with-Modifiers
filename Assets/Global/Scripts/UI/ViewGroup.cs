@@ -7,6 +7,7 @@ public class ViewGroup : MonoBehaviour
     [SerializeField] private View[] views;
     [SerializeField, ValueDropdown("viewIndexDropdown")] private View defaultView;
     private View activeView;
+    private int activeViewIndex;
 
     private void Awake()
     {
@@ -22,10 +23,23 @@ public class ViewGroup : MonoBehaviour
         });
     }
 
+    public void PreviousView()
+    {
+        int newIndex = (activeViewIndex - 1).Mod(views.Length);
+        SetActiveView(newIndex);
+    }
+
+    public void NextView()
+    {
+        int newIndex = (activeViewIndex + 1).Mod(views.Length);
+        SetActiveView(newIndex);
+    }
+
     public void SetActiveView(int index)
     {
         if (activeView != null) activeView.Close();
 
+        activeViewIndex = index;
         activeView = views[index];
         activeView.Open();
     }

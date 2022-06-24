@@ -17,7 +17,10 @@ public class Reference<T>
     {
         get
         {
-            if (_value == null) BuildReferenceValue();
+            if (_value == null || _value.Equals(null))
+            {
+                BuildReferenceValue();
+            }
 
             return _value;
         }

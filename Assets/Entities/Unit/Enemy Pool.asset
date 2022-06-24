@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameObject: {fileID: 6122467011746149686, guid: 4f2f1c816420a2b4fbe47fbf7963f095,
     type: 3}
-  startingCapacity: 100
+  startingCapacity: 60
