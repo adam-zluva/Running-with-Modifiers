@@ -20,6 +20,7 @@ public class LevelSet : ScriptableObject
             int unitsAfterB = (int)Mathf.Max(section.expressionB.Calculate(unitCount), 0);
 
             unitCount = Mathf.Max(unitsAfterA, unitsAfterB) - section.enemies;
+            section.unitsBeforeEncounter = unitCount + section.enemies;
             section.unitsAfterSection = unitCount;
         }
     }
@@ -39,6 +40,7 @@ public class LevelSection
     public int enemies => _enemies;
 
 #if UNITY_EDITOR
+    [ReadOnly] public int unitsBeforeEncounter;
     [ReadOnly] public int unitsAfterSection;
 #endif
 

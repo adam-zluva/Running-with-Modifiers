@@ -12,29 +12,59 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d34e1828f18409847a1cc3034bd8408c, type: 3}
   m_Name: Levels_2
   m_EditorClassIdentifier: 
-  _startingPlayerUnits: 3
+  _startingUnitCount: 7
   _levelSections:
   - _expressionA:
-      _operation: 2
+      _operation: 1
       _value: 3
     _expressionB:
-      _operation: 0
-      _value: 4
-    _enemies: 7
-    lastSection: 0
+      _operation: 1
+      _value: 5
+    _enemies: 3
+    unitsBeforeEncounter: 4
+    unitsAfterSection: 1
   - _expressionA:
       _operation: 0
-      _value: 7
+      _value: 6
     _expressionB:
       _operation: 2
-      _value: 3
-    _enemies: 6
-    lastSection: 0
+      _value: 2
+    _enemies: 3
+    unitsBeforeEncounter: 7
+    unitsAfterSection: 4
+  - _expressionA:
+      _operation: 2
+      _value: 0
+    _expressionB:
+      _operation: 1
+      _value: 1
+    _enemies: 1
+    unitsBeforeEncounter: 3
+    unitsAfterSection: 2
   - _expressionA:
       _operation: 2
       _value: 1
     _expressionB:
       _operation: 3
       _value: 0.5
-    _enemies: 5
-    lastSection: 1
+    _enemies: 3
+    unitsBeforeEncounter: 4
+    unitsAfterSection: 1
+  - _expressionA:
+      _operation: 0
+      _value: 15
+    _expressionB:
+      _operation: 2
+      _value: 10
+    _enemies: 11
+    unitsBeforeEncounter: 16
+    unitsAfterSection: 5
+  - _expressionA:
+      _operation: 0
+      _value: 2
+    _expressionB:
+      _operation: 3
+      _value: 0.5
+    _enemies: 8
+    unitsBeforeEncounter: 10
+    unitsAfterSection: 2

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d34e1828f18409847a1cc3034bd8408c, type: 3}
   m_Name: Levels_1
   m_EditorClassIdentifier: 
-  _startingPlayerUnits: 3
+  _startingUnitCount: 3
   _levelSections:
   - _expressionA:
       _operation: 2
@@ -21,7 +21,7 @@ MonoBehaviour:
       _operation: 0
       _value: 3
     _enemies: 7
-    lastSection: 1
+    unitsAfterSection: 2
   - _expressionA:
       _operation: 2
       _value: 4
@@ -29,7 +29,7 @@ MonoBehaviour:
       _operation: 1
       _value: 1
     _enemies: 3
-    lastSection: 1
+    unitsAfterSection: 5
   - _expressionA:
       _operation: 0
       _value: 5
@@ -37,7 +37,7 @@ MonoBehaviour:
       _operation: 3
       _value: 2
     _enemies: 6
-    lastSection: 1
+    unitsAfterSection: 4
   - _expressionA:
       _operation: 0
       _value: 6
@@ -45,7 +45,7 @@ MonoBehaviour:
       _operation: 1
       _value: 2
     _enemies: 5
-    lastSection: 1
+    unitsAfterSection: 5
   - _expressionA:
       _operation: 2
       _value: 10
@@ -53,4 +53,4 @@ MonoBehaviour:
       _operation: 0
       _value: 10
     _enemies: 17
-    lastSection: 1
+    unitsAfterSection: 33
