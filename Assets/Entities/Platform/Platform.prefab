@@ -1,5 +1,66 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &319463669318896711
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3913110990593946969}
+  - component: {fileID: 5383359539431737132}
+  m_Layer: 0
+  m_Name: Endcounter End
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3913110990593946969
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 319463669318896711}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7684560763003866189}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5383359539431737132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 319463669318896711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecea6e12c7408834faa85afea93fa265, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sequence:
+  - _delay: 0.01
+    onInvoke:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5262251973632672404}
+          m_TargetAssemblyTypeName: Platform, Core
+          m_MethodName: EndEncounter
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &347489524813896492
 GameObject:
   m_ObjectHideFlags: 0
@@ -33,6 +94,7 @@ Transform:
   - {fileID: 7181140210577721018}
   - {fileID: 4829330988675017624}
   - {fileID: 1452198723018583667}
+  - {fileID: 3913110990593946969}
   m_Father: {fileID: 7393151597975451065}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -453,8 +515,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e333dd29e57f0c64fb395e4a62b95e79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gateA: {fileID: 663691921894343685}
-  gateB: {fileID: 2151028571269698584}
+  gateA: {fileID: 2151028571269698584}
+  gateB: {fileID: 663691921894343685}
   unitGroup: {fileID: 1742552797360194594}
   playerUnitGroup:
     referenceType: 1
@@ -490,7 +552,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  onEnconterStarted:
+  onEncounterStarted:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6997980896648159876}
@@ -517,7 +579,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  onEnconterEnded:
+  onEncounterEnded:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5817152831951883204}
@@ -589,9 +651,9 @@ MonoBehaviour:
   onGroupEmpty:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5262251973632672404}
-        m_TargetAssemblyTypeName: Platform, Core
-        m_MethodName: EndEncounter
+      - m_Target: {fileID: 5383359539431737132}
+        m_TargetAssemblyTypeName: AsyncEventSequence, Core
+        m_MethodName: StartSequence
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -899,7 +961,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sequence:
-  - _delay: 0
+  - _delay: 0.1
     onInvoke:
       m_PersistentCalls:
         m_Calls:
@@ -1057,6 +1119,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8685845025652104643, guid: 536a64e3ac9bc95498360b7474aad563,
         type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8685845025652104643, guid: 536a64e3ac9bc95498360b7474aad563,
+        type: 3}
       propertyPath: followTarget.assignedTransform
       value: 
       objectReference: {fileID: 1452198723018583667}
@@ -1064,6 +1131,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Units Power Canvas Container
+      objectReference: {fileID: 0}
+    - target: {fileID: 8685845025908099688, guid: 536a64e3ac9bc95498360b7474aad563,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8685845027214484372, guid: 536a64e3ac9bc95498360b7474aad563,
         type: 3}

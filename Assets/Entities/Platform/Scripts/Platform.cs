@@ -10,25 +10,31 @@ public class Platform : MonoBehaviour
 
     public UnityEvent onInit;
     public UnityEvent onGatePassed;
-    public UnityEvent onEnconterStarted;
-    public UnityEvent onEnconterEnded;
+    public UnityEvent onEncounterStarted;
+    public UnityEvent onEncounterEnded;
     public UnityEvent onDispose;
 
     public void Init()
     {
+        onInit.RemoveAllListeners();
+        onGatePassed.RemoveAllListeners();
+        onEncounterStarted.RemoveAllListeners();
+        onEncounterEnded.RemoveAllListeners();
+        onDispose.RemoveAllListeners();
+
         onInit.Invoke();
     }
 
     public void StartEncounter()
     {
-        onEnconterStarted.Invoke();
+        onEncounterStarted.Invoke();
         unitGroup.StartEncounter(playerUnitGroup.value);
         playerUnitGroup.value.StartEncounter(unitGroup);
     }
 
     public void EndEncounter()
     {
-        onEnconterEnded.Invoke();
+        onEncounterEnded.Invoke();
         unitGroup.EndEncounter();
         playerUnitGroup.value.EndEncounter();
     }
@@ -46,11 +52,9 @@ public class Platform : MonoBehaviour
 
     public void SetSection(LevelSection section)
     {
-        //Debug.Log($"{gameObject.name} - {gameObject.activeInHierarchy}", gameObject);
         SetUnits(section.enemies);
         gateA.SetGate(section.expressionA);
         gateB.SetGate(section.expressionB);
-        //Debug.Log($"{gameObject.name} - {gameObject.activeInHierarchy}", gameObject);
     }
 
     void SetUnits(int count)

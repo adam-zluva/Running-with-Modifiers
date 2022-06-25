@@ -5,7 +5,20 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Service Provider")]
 public class ServiceProvider : ScriptableObject
 {
-    private Dictionary<Type, object> services;
+    private Dictionary<Type, object> _services;
+    private Dictionary<Type, object> services
+    {
+        get
+        {
+            if (_services == null) Init();
+            return _services;
+        }
+
+        set
+        {
+            _services = value;
+        }
+    }
 
     public void Init()
     {

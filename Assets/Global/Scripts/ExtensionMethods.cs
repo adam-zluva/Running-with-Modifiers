@@ -91,4 +91,20 @@ public static class ExtensionMethods
     {
         return new Vector3(vector.x * otherVector.x, vector.y * otherVector.y, vector.z * otherVector.z);
     }
+
+    public static T GetRandom<T>(this T[] arr)
+    {
+        return arr[Random.Range(0, arr.Length)];
+    }
+
+    public static T GetRandom<T>(this T[] arr, params T[] excluded)
+    {
+        List<T> list = new List<T>(arr);
+        foreach (var exclude in excluded)
+        {
+            list.Remove(exclude);
+        }
+
+        return list[Random.Range(0, list.Count)];
+    }
 }

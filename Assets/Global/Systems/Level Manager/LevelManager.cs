@@ -8,12 +8,12 @@ public class LevelManager : MonoBehaviour
     public UnityEvent onLevelQuit;
     public UnityEvent onLevelWon;
     public UnityEvent onLevelLost;
-    [Space]
+
     private ILevelBuilder levelBuilder;
 
     private void Awake()
     {
-        levelBuilder = GetComponent<ILevelBuilder>();
+        levelBuilder = GetComponent<ILevelBuilder>().Init(this);
     }
 
     public void SelectLevel(LevelSet level)
@@ -24,6 +24,12 @@ public class LevelManager : MonoBehaviour
     public void BuildLevel(LevelSet level)
     {
         levelBuilder.BuildLevel(level);
+        onLevelBuilt.Invoke();
+    }
+
+    public void BuildLevelProcedural()
+    {
+        levelBuilder.BuildLevelProcedural();
         onLevelBuilt.Invoke();
     }
 
@@ -45,5 +51,7 @@ public class LevelManager : MonoBehaviour
 
 public interface ILevelBuilder
 {
+    public ILevelBuilder Init(LevelManager levelManager);
     public void BuildLevel(LevelSet level);
+    public void BuildLevelProcedural();
 }

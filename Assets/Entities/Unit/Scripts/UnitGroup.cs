@@ -22,6 +22,8 @@ public class UnitGroup : MonoBehaviour
 
     public int numberOfUnits => activeUnits.Count;
 
+    private const int MAX_UNITS = 300;
+
     public void StartEncounter(UnitGroup enemyGroup)
     {
         activeUnits.ForEach(unit => unit.StartEncounter(enemyGroup.activeUnits));
@@ -86,9 +88,15 @@ public class UnitGroup : MonoBehaviour
         return unitObj;
     }
 
+    public int UnitsAfterExpression(MathExpression expression)
+    {
+        float newUnitCount = Mathf.Clamp(expression.Calculate(numberOfUnits), 0, MAX_UNITS);
+        return (int)newUnitCount;
+    }
+
     public void HandleExpression(Vector3 localPosition, MathExpression expression)
     {
-        int newUnitCount = (int)expression.operation.Calculate(numberOfUnits, expression.value);
+        int newUnitCount = UnitsAfterExpression(expression);
         int unitsNeeded = Mathf.Abs(newUnitCount - numberOfUnits);
 
         if (newUnitCount > numberOfUnits)

@@ -2,20 +2,28 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 
 [CreateAssetMenu(menuName = "Level Set")]
-public class LevelSet : ScriptableObject, ISerializationCallbackReceiver
+public class LevelSet : ScriptableObject
 {
-    [SerializeField] private int _startingPlayerUnits = 1;
-    public int startingPlayerUnits { get => _startingPlayerUnits; private set => _startingPlayerUnits = value; }
+    [SerializeField] private int _startingUnitCount = 1;
+    public int startingUnitCount { get => _startingUnitCount; private set => _startingUnitCount = value; }
 
     [SerializeField] private LevelSection[] _levelSections;
     public LevelSection[] levelSections => _levelSections;
 
-    public void OnBeforeSerialize()
+#if UNITY_EDITOR
+    private void OnValidate()
     {
-        levelSections[levelSections.Length - 1].lastSection = true;
-    }
+        int unitCount = startingUnitCount;
+        foreach (var section in levelSections)
+        {
+            int unitsAfterA = (int)Mathf.Max(section.expressionA.Calculate(unitCount), 0);
+            int unitsAfterB = (int)Mathf.Max(section.expressionB.Calculate(unitCount), 0);
 
-    public void OnAfterDeserialize() { }
+            unitCount = Mathf.Max(unitsAfterA, unitsAfterB) - section.enemies;
+            section.unitsAfterSection = unitCount;
+        }
+    }
+#endif
 }
 
 [System.Serializable]
@@ -30,7 +38,16 @@ public class LevelSection
     [SerializeField] private int _enemies;
     public int enemies => _enemies;
 
-    [HideInInspector] public bool lastSection;
+#if UNITY_EDITOR
+    [ReadOnly] public int unitsAfterSection;
+#endif
+
+    public LevelSection(MathExpression expressionA, MathExpression expressionB, int enemies)
+    {
+        _expressionA = expressionA;
+        _expressionB = expressionB;
+        _enemies = enemies;
+    }
 }
 
 [System.Serializable, InlineProperty]
@@ -50,8 +67,24 @@ public class MathExpression
         _value = value;
     }
 
+    public static MathExpression GetRandomExpression(int minValue, int maxValue)
+    {
+        float value = Random.Range(minValue, maxValue);
+        return new MathExpression(GetRandomOperation(), value);
+    }
+
+    public static Operation GetRandomOperation()
+    {
+        return (Operation)Random.Range(0, 4);
+    }
+
+    public float Calculate(float leftSide)
+    {
+        return operation.Calculate(leftSide, value);
+    }
+
     public enum Operation
     {
-        Addition, Subtraction, Multiplication, Division
+        Addition = 0, Subtraction = 1, Multiplication = 2, Division = 3
     }
 }
