@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Inverted Hull
+  m_Name: Units Inverted Hull
   m_Shader: {fileID: -6465566751694194690, guid: e36692ea3f638124ca2a04d6fa32cda8,
     type: 3}
   m_ValidKeywords: []
