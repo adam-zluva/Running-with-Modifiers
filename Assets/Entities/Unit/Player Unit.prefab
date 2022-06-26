@@ -541,6 +541,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: 8152661d4db80c647a6cf7545b264791, type: 2}
+        m_TargetAssemblyTypeName: EventChannels.EventChannel`1[[Sound, Core
+        m_MethodName: RaiseEvent
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 9a6ca9ebe3fbf0846969490b230abe31,
+            type: 2}
+          m_ObjectArgumentAssemblyTypeName: Sound, Core
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   onDispose:
     m_PersistentCalls:
       m_Calls:
@@ -633,7 +646,7 @@ MonoBehaviour:
     assignedTransform: {fileID: 0}
     searchTag: PlayerFollowPoint
   smoothTime: 0
-  speed: 5000
+  speed: 6000
   _speedMultiplier: 1
 --- !u!114 &8758361867502197500
 MonoBehaviour:

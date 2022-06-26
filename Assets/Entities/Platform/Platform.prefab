@@ -552,6 +552,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: 8152661d4db80c647a6cf7545b264791, type: 2}
+        m_TargetAssemblyTypeName: EventChannels.EventChannel`1[[Sound, Core
+        m_MethodName: RaiseEvent
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: c6aad41b4eb207145b02b8b78395ebc0,
+            type: 2}
+          m_ObjectArgumentAssemblyTypeName: Sound, Core
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onEncounterStarted:
     m_PersistentCalls:
       m_Calls:
