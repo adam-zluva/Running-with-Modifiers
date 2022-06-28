@@ -97,11 +97,6 @@ public class Unit : MonoBehaviour
     {
         if (other.CompareTag(enemyTag))
         {
-            if (other.TryGetComponent(out Unit otherUnit))
-            {
-                otherUnit.Death();
-            }
-
             Death();
         }
     }

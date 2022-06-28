@@ -3,7 +3,8 @@ using UnityEngine;
 
 namespace EventChannels
 {
-    public abstract class EventChannelListener<T, U> : MonoBehaviour where T : EventChannel<U>
+    public abstract class EventChannelListener<T, U> : MonoBehaviour
+        where T : EventChannel<U>
     {
         [SerializeField] private T eventChannel;
         [SerializeField] private UnityEvent<U> onEventRaised;
