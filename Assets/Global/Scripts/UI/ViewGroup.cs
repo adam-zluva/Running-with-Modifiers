@@ -11,7 +11,16 @@ public class ViewGroup : MonoBehaviour
 
     private void Awake()
     {
-        CloseAllViews();
+        Setup();
+    }
+
+    private void Setup()
+    {
+        foreach (var view in views)
+        {
+            view.viewObject.SetActive(false);
+        }
+
         SetActiveView(defaultView);
     }
 
